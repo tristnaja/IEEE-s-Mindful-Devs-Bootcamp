@@ -68,7 +68,7 @@ body {
 
 .ai-bubble,
 .model-bubble {
-    background-color: var(--grey);
+    background-color: #242424;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
 }

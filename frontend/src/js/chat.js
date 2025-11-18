@@ -12,11 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let conversationId = `conv_${Date.now()}`; // Simple unique ID for new conversations
 
+    const formatMessage = (text) => {
+        // Basic security: escape HTML to prevent XSS, then apply formatting.
+        const escapedText = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        // 1. Bold: **text** -> <strong>text</strong>
+        const boldedText = escapedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // 2. Lists: * item -> • item
+        const listedText = boldedText.replace(/^\* (.*$)/gim, '&bull; $1');
+
+        // 3. Newlines: \n -> <br>
+        return listedText.replace(/\n/g, '<br>');
+    };
+
     const displayMessage = (text, role) => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', `${role}-bubble`);
         const p = document.createElement('p');
-        p.textContent = text;
+
+        if (role === 'user') {
+            p.textContent = text;
+        } else {
+            p.innerHTML = formatMessage(text);
+        }
+
         messageDiv.appendChild(p);
         chatArea.appendChild(messageDiv);
         chatArea.scrollTop = chatArea.scrollHeight;
@@ -63,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             hideLoadingIndicator();
             console.error('Send message error:', error);
-            // Assuming you have a showToast function available
             if (window.showToast) {
                 showToast(error.message, 'error');
             }
@@ -79,21 +98,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (data.conversations && data.conversations.length > 0) {
-                // For simplicity, load the latest conversation
                 const latestConversation = data.conversations[0];
                 conversationId = latestConversation.conversationId;
                 chatArea.innerHTML = ''; // Clear static messages
                 latestConversation.messages.forEach(msg => {
-                    displayMessage(msg.text, msg.role);
+                    displayMessage(msg.text, msg.role === 'model' ? 'ai' : 'user');
                 });
             } else {
-                // No history, start a new conversation
                 chatArea.innerHTML = '';
                 displayMessage('Hello! How can I help you today?', 'ai');
             }
         } catch (error) {
             console.error('Load conversations error:', error);
-            chatArea.innerHTML = ''; // Clear static messages even on error
+            chatArea.innerHTML = '';
             displayMessage('Hello! How can I help you today?', 'ai');
             if (window.showToast) {
                 showToast(error.message, 'error');
@@ -123,6 +140,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Initial load
     loadConversations();
 });
