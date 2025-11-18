@@ -102,6 +102,12 @@ body {
     height: 80px;
 }
 
+.unique {
+    background-color: var(--white);
+    border-radius: 100%;
+    border: var(--white) solid 1px;
+}
+
 .contributor-sub {
     display: flex;
     gap: 5px;
