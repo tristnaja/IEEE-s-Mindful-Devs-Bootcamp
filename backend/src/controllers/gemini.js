@@ -2,52 +2,48 @@
 const geminiService = require('../services/gemini');
 
 /**
- * Controller for text generation.
+ * Controller to send a message and get a response from the Gemini model.
  * @param {object} req - The Express request object.
  * @param {object} res - The Express response object.
  */
-const generate = async (req, res) => {
+const sendMessage = async (req, res) => {
     try {
-        const { prompt } = req.body;
+        const { userId, conversationId, text } = req.body;
 
-        if (!prompt) {
-            return res.status(400).json({ message: 'Prompt is required' });
+        if (!userId || !conversationId || !text) {
+            return res.status(400).json({ message: 'userId, conversationId, and text are required' });
         }
 
-        const text = await geminiService.generateText(prompt);
-        res.status(200).json({ response: text });
+        const modelResponse = await geminiService.sendMessage(userId, conversationId, text);
+        res.status(200).json({ response: modelResponse });
     } catch (error) {
-        // Centralized error handling. We log the error for debugging
-        // and send a generic error message to the client.
-        console.error('Error in text generation:', error);
-        res.status(500).json({ message: 'Failed to generate text' });
+        console.error('Error in sendMessage controller:', error);
+        res.status(500).json({ message: 'Failed to send message' });
     }
 };
 
 /**
- * Controller for multi-turn chat.
+ * Controller to load all conversations for a user.
  * @param {object} req - The Express request object.
  * @param {object} res - The Express response object.
  */
-const chat = async (req, res) => {
+const loadConversations = async (req, res) => {
     try {
-        const { history, message } = req.body;
+        const { userId } = req.query;
 
-        if (!message) {
-            return res.status(400).json({ message: 'Message is required' });
+        if (!userId) {
+            return res.status(400).json({ message: 'userId is required' });
         }
 
-        const chatHistory = history || [];
-
-        const text = await geminiService.startChat(chatHistory, message);
-        res.status(200).json({ response: text });
+        const conversations = await geminiService.loadConversations(userId);
+        res.status(200).json({ conversations });
     } catch (error) {
-        console.error('Error in chat:', error);
-        res.status(500).json({ message: 'Failed to get chat response' });
+        console.error('Error in loadConversations controller:', error);
+        res.status(500).json({ message: 'Failed to load conversations' });
     }
 };
 
 module.exports = {
-    generate,
-    chat,
+    sendMessage,
+    loadConversations,
 };

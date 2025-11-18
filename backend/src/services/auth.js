@@ -11,6 +11,7 @@ const createUser = async (userData) => {
   });
   await user.save();
   return {
+    _id: user._id,
     name: user.name,
     email: user.email,
   };
@@ -27,6 +28,7 @@ const loginUser = async (credentials) => {
     throw new Error('Invalid email or password');
   }
   return {
+    _id: user._id,
     name: user.name,
     email: user.email,
   };
@@ -38,6 +40,7 @@ const getUserProfile = async (email) => {
     throw new Error('User not found');
   }
   return {
+    _id: user._id,
     name: user.name,
     email: user.email,
   };

@@ -3,18 +3,105 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mindful Devs - Home</title>
-    <link href="../styles/style.css" rel="stylesheet">
-    <link href="../styles/toast.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Devs - Dashboard</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <link rel="stylesheet" href="../styles/toast.css">
 </head>
 
 <body>
     <div class="toast-container"></div>
-    <div class="form-wrapper">
-        <h1 class="title">Welcome, <span id="user-name">...</span>!</h1>
-        <button class="submit-button" id="logout-button" type="button">Logout</button>
+
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">Mindful Devs</a>
+        <a href="#" class="navbar-login-button" id="logout-button">Logout</a>
+    </nav>
+
+    <div class="main-container">
+        <section class="content-section cta-section">
+            <h1 class="title">Welcome, <span id="user-name">...</span>!</h1>
+            <p class="subtitle" style="margin-bottom: 20px;">
+                Ready to continue your journey? Let's start a conversation.
+            </p>
+            <a href="chat.html" id="chat-button" class="cta-button">Chat With Gemini Bot</a>
+            <div class="commit-section">
+                <a href="https://github.com/SB2318/IEEE-s-Mindful-Devs-Bootcamp/commit/2d5e4fbd177036ef4b9cfd952bc864ad9d0094bb"
+                    target="_blank" rel="noopener noreferrer" class="commit-link">
+                    Latest Commit: 2d5e4fb
+                </a>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Project Description</h2>
+            <p>
+                This project is a scalable and modular foundation for an AI-driven Chatbot. It allows contributors to
+                learn, experiment, and submit production-ready features, focusing on modern web development practices
+                including authentication, API integration, and a clean frontend.
+            </p>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Contributor</h2>
+            <div class="contributor-card">
+                <img class="contributor-pic" src="../../public/prof-pic.png" alt="profile picture" />
+                <div class="contributor-content">
+                    <div class="contributor-profile">
+                        <p class="contributor-name">Tristan Al Harrish Basori</p>
+                        <div class="contributor-sub">
+                            <p class="contributor-github">@tristnaja</p>
+                            <p class="contributor-title">- Software Engineer</p>
+                        </div>
+                        <p class="contributor-bio">
+                            Turning coffee into clean code ☕ | Software Engineer crafting apps & web
+                            experiences that (usually) behave themselves.
+                        </p>
+                    </div>
+                    <p id="line"></p>
+                    <div class="contributor-tech">
+                        <a href="https://skillicons.dev">
+                            <img class="techs" src="https://skillicons.dev/icons?i=c,ts,js,py,nextjs,fastapi" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section achievements-section">
+            <h2 class="section-title">My Achievements</h2>
+            <div class="task-columns">
+                <div class="task-day">
+                    <h3>Day 1</h3>
+                    <ul>
+                        <li>Design a Simple Login & Signup Layout (Minimal Info)</li>
+                        <li>Obtain Gemini API Key And Secure It</li>
+                        <li>Website Skeleton (HTML + CSS)</li>
+                        <li>Backend Setup & Environment Preparation</li>
+                    </ul>
+                </div>
+                <div class="task-day">
+                    <h3>Day 2</h3>
+                    <ul>
+                        <li>Integrate Authentication Endpoints</li>
+                        <li>Design Home Page after Login</li>
+                        <li>Build "Chat with Gemini" Core Interface (Web Version)</li>
+                        <li>Add Authentication Endpoints (Create User, Login, Profile)</li>
+                    </ul>
+                </div>
+                <div class="task-day">
+                    <h3>Day 3</h3>
+                    <ul>
+                        <li>Integrate Chat APIs into your website.</li>
+                        <li>Implement ChatBot Backend (Generative AI Integration)</li>
+                        <li>Final Navigation Set Up</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
+
     <script src="../js/toast.js"></script>
     <script src="../js/home.js" defer></script>
 </body>

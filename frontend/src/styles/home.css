@@ -1,0 +1,60 @@
+.achievements-section .task-day li {
+    background-color: var(--black);
+    border-color: var(--green);
+    color: var(--grey);
+    text-decoration: line-through;
+    cursor: default;
+}
+
+.achievements-section .task-day li::before {
+    content: '✔';
+    color: var(--green);
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.achievements-section .task-day li:hover {
+    transform: none;
+    border-color: var(--green);
+}
+
+/* Call to Action Section */
+.cta-section {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.cta-button {
+    padding: 15px 30px;
+    border-radius: 8px;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(44, 131, 245, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(44, 131, 245, 0.4);
+}
+
+/* Latest Commit Section */
+.commit-section {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.commit-link {
+    color: var(--grey);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--grey);
+    transition: color 0.3s ease;
+}
+
+.commit-link:hover {
+    color: var(--white);
+}
